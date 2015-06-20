@@ -19,7 +19,7 @@ class AnyFloat extends InputDataBase
     public function __construct($isZeroAllowed = true, $isMinusAllowed = true, $isNullAllowed = false)
     {
         $valid      = [63.3];
-        $invalid    = ['test_string', mt_rand(1, 1000), PHP_INT_MAX, [], false, new \stdClass()];
+        $invalid    = ['test_string', mt_rand(1, 1000), [], false, new \stdClass()];
 
         if ($isZeroAllowed === true) {
             $valid[] = 0;
