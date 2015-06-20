@@ -5,26 +5,19 @@ namespace PhpUnitPlus\Lib\Util\Simple;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 
 /**
- * Class AnyArray
+ * Class AnyBool
  * @package PhpUnitPlus\Lib\Util\Simple
  */
-class AnyArray extends InputDataBase
+class AnyBool extends InputDataBase
 {
     /**
      * Configure class
-     * @param bool $isEmptyAllowed
      * @param bool $isNullAllowed
      */
-    public function __construct($isEmptyAllowed = true, $isNullAllowed = false)
+    public function __construct($isNullAllowed = false)
     {
-        $valid      = [['test']];
-        $invalid    = ['test_string', mt_rand(1, 1000), 52.6, false, new \stdClass()];
-
-        if ($isEmptyAllowed === true) {
-            $valid[] = [];
-        } else {
-            $invalid[] = [];
-        }
+        $valid      = [true];
+        $invalid    = ['test_string', mt_rand(1, 1000), 52.6, [], new \stdClass()];;
 
         if ($isNullAllowed === true) {
             $valid[] = null;

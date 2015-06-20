@@ -13,12 +13,12 @@ abstract class InputDataBase implements InputDataInterface
     /**
      * @var array
      */
-    private $valid;
+    protected $valid;
 
     /**
      * @var array
      */
-    private $invalid;
+    protected $invalid;
 
     /**
      * Return list of valid params

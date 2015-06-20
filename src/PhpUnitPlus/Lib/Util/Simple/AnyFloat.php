@@ -38,5 +38,8 @@ class AnyFloat extends InputDataBase
         } else {
             $invalid[] = null;
         }
+
+        $this->valid    = $valid;
+        $this->invalid  = $invalid;
     }
 }
