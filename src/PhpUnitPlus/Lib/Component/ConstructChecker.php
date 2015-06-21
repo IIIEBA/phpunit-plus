@@ -10,20 +10,20 @@ trait ConstructChecker
 {
     /**
      * Method for testing constructor with valid and invalid arrays of data, with callback function
-     * @param InputDataInterface $inputData
+     * @param InputDataInterface[] $inputDataList
      * @param callable $userFunc
      */
-    public function checkConstructor(InputDataInterface $inputData, callable $userFunc)
+    public function checkConstructor(array $inputDataList, callable $userFunc)
     {
         // Prepare data
         $validPrepared = [];
         $maxCountValid = 0;
-        foreach ($inputData->getValid() as $name => $elmPool) {
-            if (($count = count($elmPool)) > $maxCountValid) {
+        foreach ($inputDataList as $name => $inputData) {
+            if (($count = count($inputData->getValid())) > $maxCountValid) {
                 $maxCountValid = $count;
             }
 
-            $validPrepared[$name] = reset($elmPool);
+            $validPrepared[$name] = reset($inputData->getValid());
         }
 
         // Check valid params
@@ -31,7 +31,8 @@ trait ConstructChecker
             try {
                 if ($num !== 0) {
                     $validPrepared = [];
-                    foreach ($inputData->getValid() as $name => $values) {
+                    foreach ($inputDataList as $name => $inputData) {
+                        $values = $inputData->getValid();
                         $validPrepared[$name] = array_key_exists($num, $values) ? $values[$num] : reset($values);
                     }
                 }
@@ -44,8 +45,8 @@ trait ConstructChecker
         }
 
         // Check invalid data
-        foreach ($inputData->getInvalid() as $num => $elmPool) {
-            foreach ($elmPool as $elm) {
+        foreach ($inputDataList as $num => $inputData) {
+            foreach ($inputData->getInvalid() as $elm) {
                 try {
                     $invalidParams          = $validPrepared;
                     $invalidParams[$num]    = $elm;
