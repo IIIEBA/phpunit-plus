@@ -5,7 +5,7 @@ namespace PhpUnitPlus\Lib\Util\Custom;
 use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 
-class Manual extends InputDataBase
+class ManualInput extends InputDataBase
 {
     /**
      * Check construct method for correct validation

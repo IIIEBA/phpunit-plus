@@ -23,8 +23,8 @@ trait ConstructChecker
                 $maxCountValid = $count;
             }
 
-            $data                   = $inputData->getValid();
-            $validPrepared[$name]   = reset($data);
+            $data = $inputData->getValid();
+            $validPrepared[$name] = reset($data);
         }
 
         // Check valid params
