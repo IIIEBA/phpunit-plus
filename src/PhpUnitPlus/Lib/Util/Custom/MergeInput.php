@@ -3,6 +3,7 @@
 namespace PhpUnitPlus\Lib\Util\Custom;
 
 use PhpUnitPlus\Lib\Component\InputDataInterface;
+use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 
 /**
@@ -86,7 +87,7 @@ class MergeInput extends InputDataBase{
                             break;
 
                         default:
-                            throw new \Exception("Not supported type of variable was given - {$elm}");
+                            throw new PhpUnitPlusException("Not supported type of variable was given - {$elm}");
                     }
 
                     if ($name === 'valid') {

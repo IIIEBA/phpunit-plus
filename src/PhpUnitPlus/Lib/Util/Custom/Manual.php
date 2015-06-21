@@ -2,12 +2,13 @@
 
 namespace PhpUnitPlus\Lib\Util\Custom;
 
+use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 
 class Manual extends InputDataBase
 {
     /**
-     * Resolve
+     * Check construct method for correct validation
      * @param array $valid
      * @param array $invalid
      * @throws \Exception
@@ -84,7 +85,7 @@ class Manual extends InputDataBase
                         break;
 
                     default:
-                        throw new \Exception("Not supported type of variable was given - {$elm}");
+                        throw new PhpUnitPlusException("Not supported type of variable was given - {$elm}");
                 }
             }
         }
