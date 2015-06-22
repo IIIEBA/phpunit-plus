@@ -3,17 +3,17 @@
 namespace PhpUnitPlus\Lib\Component;
 
 /**
- * Class ConstructChecker
+ * Class InputDataChecker
  * @package PhpUnitPlus\Lib\Component
  */
-trait ConstructChecker
+trait InputDataChecker
 {
     /**
      * Method for testing constructor with valid and invalid arrays of data, with callback function
      * @param InputDataInterface[] $inputDataList
      * @param callable $userFunc
      */
-    public function checkConstructor(array $inputDataList, callable $userFunc)
+    public function checkInputData(array $inputDataList, callable $userFunc)
     {
         // Prepare data
         $validPrepared = [];
