@@ -2,6 +2,7 @@
 
 namespace PhpUnitPlus\Lib\Util\Simple;
 
+use PhpUnitPlus\Lib\Util\Custom\ManualInput;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 
 /**
@@ -18,28 +19,24 @@ class AnyInteger extends InputDataBase
      */
     public function __construct($isZeroAllowed = true, $isMinusAllowed = true, $isNullAllowed = false)
     {
-        $valid      = [mt_rand(1, 1000), PHP_INT_MAX];
-        $invalid    = ['test_string', 15.2, [], false, new \stdClass()];
+        $valid = [mt_rand(1, PHP_INT_MAX), PHP_INT_MAX];
 
         if ($isZeroAllowed === true) {
             $valid[] = 0;
-        } else {
-            $invalid[] = 0;
         }
 
         if ($isMinusAllowed === true) {
-            $valid[] = mt_rand(-1000, -1);
-        } else {
-            $invalid[] = mt_rand(-1000, -1);
+            $valid[] = mt_rand(1, PHP_INT_MAX) * -1;
         }
 
         if ($isNullAllowed === true) {
             $valid[] = null;
-        } else {
-            $invalid[] = null;
         }
 
+        $tmp = new ManualInput($valid);
         $this->valid    = $valid;
-        $this->invalid  = $invalid;
+        $this->invalid  = $tmp->getInvalid();
+
+        unset($tmp);
     }
 }

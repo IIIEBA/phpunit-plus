@@ -2,6 +2,7 @@
 
 namespace PhpUnitPlus\Lib\Util\Simple;
 
+use PhpUnitPlus\Lib\Util\Custom\ManualInput;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 
 /**
@@ -17,22 +18,20 @@ class AnyArray extends InputDataBase
      */
     public function __construct($isEmptyAllowed = true, $isNullAllowed = false)
     {
-        $valid      = [['test']];
-        $invalid    = ['test_string', mt_rand(1, 1000), 52.6, false, new \stdClass()];
+        $valid = [['test']];
 
         if ($isEmptyAllowed === true) {
             $valid[] = [];
-        } else {
-            $invalid[] = [];
         }
 
         if ($isNullAllowed === true) {
             $valid[] = null;
-        } else {
-            $invalid[] = null;
         }
 
+        $tmp = new ManualInput($valid);
         $this->valid    = $valid;
-        $this->invalid  = $invalid;
+        $this->invalid  = $tmp->getInvalid();
+
+        unset($tmp);
     }
 }

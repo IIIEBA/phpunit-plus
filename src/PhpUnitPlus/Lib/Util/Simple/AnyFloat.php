@@ -2,6 +2,7 @@
 
 namespace PhpUnitPlus\Lib\Util\Simple;
 
+use PhpUnitPlus\Lib\Util\Custom\ManualInput;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 
 /**
@@ -18,28 +19,24 @@ class AnyFloat extends InputDataBase
      */
     public function __construct($isZeroAllowed = true, $isMinusAllowed = true, $isNullAllowed = false)
     {
-        $valid      = [63.3];
-        $invalid    = ['test_string', mt_rand(1, 1000), [], false, new \stdClass()];
+        $valid = [microtime(true)];
 
         if ($isZeroAllowed === true) {
             $valid[] = 0;
-        } else {
-            $invalid[] = 0;
         }
 
         if ($isMinusAllowed === true) {
-            $valid[] = -52.3;
-        } else {
-            $invalid[] = -2.2;
+            $valid[] = microtime(true) * -0.5;
         }
 
         if ($isNullAllowed === true) {
             $valid[] = null;
-        } else {
-            $invalid[] = null;
         }
 
+        $tmp = new ManualInput($valid);
         $this->valid    = $valid;
-        $this->invalid  = $invalid;
+        $this->invalid  = $tmp->getInvalid();
+
+        unset($tmp);
     }
 }

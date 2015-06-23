@@ -23,15 +23,15 @@ class ManualInput extends InputDataBase
         if (count($invalid) === 0) {
             $invalid = [
                 'null'              => null,
-                'boolean'           => false,
+                'boolean'           => (bool)mt_rand(0, 1),
                 'object'            => new \stdClass(),
                 'string'            => 'test',
                 'emptyString'       => '',
-                'integer'           => mt_rand(1, 1000),
+                'integer'           => mt_rand(1, PHP_INT_MAX),
                 'zeroInteger'       => 0,
-                'negativeInteger'   => -634,
-                'double'            => 5.3,
-                'negativeDouble'    => -27.3,
+                'negativeInteger'   => mt_rand(1, PHP_INT_MAX) * -1,
+                'double'            => microtime(true),
+                'negativeDouble'    => microtime(true) * -0.5,
                 'array'             => ['test'],
                 'emptyArray'        => [],
             ];
