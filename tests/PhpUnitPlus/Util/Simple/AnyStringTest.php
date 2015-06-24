@@ -23,24 +23,32 @@ class AnyStringTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(count($one->getValid()) === 1);
         $expected   = ['string'];
         $actual     = $this->getTypesList($one->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
 
         $two = new AnyString(false, true);
         $this->assertTrue(count($two->getValid()) === 2);
         $expected   = ['string', 'null'];
         $actual     = $this->getTypesList($two->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
 
         $three = new AnyString(true, false);
         $this->assertTrue(count($three->getValid()) === 2);
         $expected   = ['emptyString', 'string'];
         $actual     = $this->getTypesList($three->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
 
         $four = new AnyString(true, true);
         $this->assertTrue(count($four->getValid()) === 3);
         $expected   = ['string', 'emptyString', 'null'];
         $actual     = $this->getTypesList($four->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
     }
 }

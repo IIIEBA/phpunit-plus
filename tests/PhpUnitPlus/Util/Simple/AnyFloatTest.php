@@ -23,24 +23,32 @@ class AnyFloatTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(count($one->getValid()) === 1);
         $expected   = ['double'];
         $actual     = $this->getTypesList($one->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
 
         $one = new AnyFloat(false, true);
         $this->assertTrue(count($one->getValid()) === 2);
         $expected   = ['double', 'null'];
         $actual     = $this->getTypesList($one->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
 
         $one = new AnyFloat(true, false);
         $this->assertTrue(count($one->getValid()) === 2);
         $expected   = ['double', 'negativeDouble'];
         $actual     = $this->getTypesList($one->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
 
         $one = new AnyFloat(true, true);
         $this->assertTrue(count($one->getValid()) === 3);
         $expected   = ['double', 'null', 'negativeDouble'];
         $actual     = $this->getTypesList($one->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
     }
 }

@@ -21,14 +21,18 @@ class AnyBoolTest extends \PHPUnit_Framework_TestCase
     {
         $one = new AnyBool(false);
         $this->assertTrue(count($one->getValid()) === 1);
-        $expected   = ['bool'];
+        $expected   = ['boolean'];
         $actual     = $this->getTypesList($one->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
 
         $two = new AnyBool(true);
         $this->assertTrue(count($two->getValid()) === 2);
-        $expected   = ['bool', 'null'];
+        $expected   = ['boolean', 'null'];
         $actual     = $this->getTypesList($two->getValid());
-        $this->assertEquals(sort($expected), sort($actual));
+        sort($expected);
+        sort($actual);
+        $this->assertEquals($expected, $actual);
     }
 }

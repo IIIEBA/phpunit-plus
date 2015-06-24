@@ -3,9 +3,17 @@
 namespace Tests\PhpUnitPlus\Util\Custom;
 
 use PhpUnitPlus\Lib\Util\Custom\ManualInput;
+use PhpUnitPlus\Lib\Util\InputTypeParser;
 
+/**
+ * Class ManualInputTest
+ *
+ * @package Tests\PhpUnitPlus\Util\Custom
+ */
 class ManualInputTest extends \PHPUnit_Framework_TestCase
 {
+    use InputTypeParser;
+
     /**
      * Test for manual set valid and invalid params
      */
@@ -25,22 +33,24 @@ class ManualInputTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidGenerator()
     {
-        $invalidList = [
-            'null'              => null,
-            'boolean'           => (bool)mt_rand(0, 1),
-            'object'            => new \stdClass(),
-            'string'            => 'test',
-            'emptyString'       => '',
-            'integer'           => mt_rand(1, PHP_INT_MAX),
-            'zeroInteger'       => 0,
-            'negativeInteger'   => mt_rand(1, PHP_INT_MAX) * -1,
-            'double'            => microtime(true),
-            'negativeDouble'    => microtime(true) * -0.5,
-            'array'             => ['test'],
-            'emptyArray'        => [],
+        $valid = ['', 'test', 1, null];
+        $expectedTypes = [
+            'boolean',
+            'object',
+            'zeroInteger',
+            'negativeInteger',
+            'double',
+            'negativeDouble',
+            'array',
+            'emptyArray',
         ];
 
-        $valid  = ['', 'test', 1, null];
-        $foo    = new ManualInput($valid);
+        $foo = new ManualInput($valid);
+        $actualTypes = $this->getTypesList($foo->getInvalid());
+        sort($expectedTypes);
+        sort($actualTypes);
+        $this->assertEquals($expectedTypes, $actualTypes);
+
+
     }
 }
