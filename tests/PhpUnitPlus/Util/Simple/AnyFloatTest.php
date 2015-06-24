@@ -33,13 +33,13 @@ class AnyFloatTest extends \PHPUnit_Framework_TestCase
 
         $one = new AnyFloat(true, false);
         $this->assertTrue(count($one->getValid()) === 2);
-        $expected   = ['double', 'minusDouble'];
+        $expected   = ['double', 'negativeDouble'];
         $actual     = $this->getTypesList($one->getValid());
         $this->assertEquals(sort($expected), sort($actual));
 
         $one = new AnyFloat(true, true);
         $this->assertTrue(count($one->getValid()) === 3);
-        $expected   = ['double', 'null', 'minusDouble'];
+        $expected   = ['double', 'null', 'negativeDouble'];
         $actual     = $this->getTypesList($one->getValid());
         $this->assertEquals(sort($expected), sort($actual));
     }

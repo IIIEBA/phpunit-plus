@@ -14,10 +14,10 @@ class AnyInteger extends InputDataBase
     /**
      * Configure class
      * @param bool $isZeroAllowed
-     * @param bool $isMinusAllowed
+     * @param bool $isNegativeAllowed
      * @param bool $isNullAllowed
      */
-    public function __construct($isZeroAllowed = true, $isMinusAllowed = true, $isNullAllowed = false)
+    public function __construct($isZeroAllowed = true, $isNegativeAllowed = true, $isNullAllowed = false)
     {
         $valid = [mt_rand(1, PHP_INT_MAX), PHP_INT_MAX];
 
@@ -25,7 +25,7 @@ class AnyInteger extends InputDataBase
             $valid[] = 0;
         }
 
-        if ($isMinusAllowed === true) {
+        if ($isNegativeAllowed === true) {
             $valid[] = mt_rand(1, PHP_INT_MAX) * -1;
         }
 
