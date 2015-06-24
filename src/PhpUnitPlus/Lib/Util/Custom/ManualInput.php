@@ -4,9 +4,12 @@ namespace PhpUnitPlus\Lib\Util\Custom;
 
 use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
 use PhpUnitPlus\Lib\Util\InputDataBase;
+use PhpUnitPlus\Lib\Util\InputTypeParser;
 
 class ManualInput extends InputDataBase
 {
+    use InputTypeParser;
+
     /**
      * Check construct method for correct validation
      * @param array $valid
@@ -36,58 +39,8 @@ class ManualInput extends InputDataBase
                 'emptyArray'        => [],
             ];
 
-            foreach ($valid as $elm) {
-                switch ($type = strtolower(gettype($elm))) {
-                    case 'null':
-                        unset($invalid['null']);
-                        break;
-
-                    case 'boolean':
-                        unset($invalid['boolean']);
-                        break;
-
-                    case 'object':
-                        unset($invalid['object']);
-                        break;
-
-                    case 'string':
-                        if ($elm === '') {
-                            unset($invalid['emptyString']);
-                        } else {
-                            unset($invalid['string']);
-                        }
-                        break;
-
-                    case 'integer':
-                        if ($elm > 0) {
-                            unset($invalid['integer']);
-                        } elseif ($elm === 0) {
-                            unset($invalid['zeroInteger']);
-                        } else {
-                            unset($invalid['negativeInteger']);
-                        }
-                        break;
-
-                    case 'double':
-                        if ($elm > 0) {
-                            unset($invalid['double']);
-                        } else {
-                            unset($invalid['negativeDouble']);
-                        }
-                        break;
-
-                    case 'array':
-                        if (count($elm) > 0) {
-                            unset($invalid['array']);
-                        } else {
-                            unset($invalid['emptyArray']);
-                        }
-                        break;
-
-                    default:
-                        throw new PhpUnitPlusException("Not supported type of variable was given - {$elm}");
-                }
-            }
+            $validTypes = $this->getTypesList($valid);
+            $invalid    = array_diff_key($invalid, array_flip($validTypes));
         }
 
         $this->valid    = $valid;

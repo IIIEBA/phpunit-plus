@@ -13,17 +13,12 @@ class AnyFloat extends InputDataBase
 {
     /**
      * Configure class
-     * @param bool $isZeroAllowed
      * @param bool $isMinusAllowed
      * @param bool $isNullAllowed
      */
-    public function __construct($isZeroAllowed = true, $isMinusAllowed = true, $isNullAllowed = false)
+    public function __construct($isMinusAllowed = true, $isNullAllowed = false)
     {
         $valid = [microtime(true)];
-
-        if ($isZeroAllowed === true) {
-            $valid[] = 0;
-        }
 
         if ($isMinusAllowed === true) {
             $valid[] = microtime(true) * -0.5;
