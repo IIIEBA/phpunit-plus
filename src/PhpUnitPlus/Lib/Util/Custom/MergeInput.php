@@ -3,8 +3,10 @@
 namespace PhpUnitPlus\Lib\Util\Custom;
 
 use PhpUnitPlus\Lib\Component\InputDataInterface;
+use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 use PhpUnitPlus\Lib\Util\InputTypeParser;
+use PhpUnitPlus\Lib\Util\Simple\TypeHintingInput;
 
 /**
  * Class MergeInput
@@ -30,6 +32,10 @@ class MergeInput extends InputDataBase{
         foreach ($params as $param) {
             if (($param instanceof InputDataInterface) === false) {
                 throw new \InvalidArgumentException('All params must be instance of InputDataInterface');
+            }
+
+            if ($param instanceof TypeHintingInput) {
+                throw new PhpUnitPlusException('You can`t merge your InputData objects with TypeHintingInput');
             }
 
             $valid   = array_merge($valid, $this->getTypesList($param->getValid(), true));

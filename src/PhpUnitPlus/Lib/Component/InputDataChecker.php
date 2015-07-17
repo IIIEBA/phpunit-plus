@@ -2,6 +2,8 @@
 
 namespace PhpUnitPlus\Lib\Component;
 
+use PHPUnit_Framework_Error;
+
 /**
  * Class InputDataChecker
  * @package PhpUnitPlus\Lib\Component
@@ -40,8 +42,15 @@ trait InputDataChecker
 
                 call_user_func_array($userFunc, $validPrepared);
                 $this->assertTrue(true);
-            } catch (\InvalidArgumentException $e) {
-                $this->fail("Test fall down with correct value with error: " . $e->getMessage());
+            } catch (\Exception $e) {
+                if (
+                    $e instanceof \InvalidArgumentException
+                    || ($e instanceof PHPUnit_Framework_Error && $e->getCode() === E_RECOVERABLE_ERROR)
+                ) {
+                    $this->fail("Test fall down with correct value with error: " . $e->getMessage());
+                } else {
+                    throw $e;
+                }
             }
         }
 
@@ -56,8 +65,15 @@ trait InputDataChecker
                     $this->fail(
                         "Test didnt fall down with incorrect value with id - {$num},  and type - " . gettype($elm)
                     );
-                } catch (\InvalidArgumentException $e) {
-                    $this->assertTrue(true);
+                } catch (\Exception $e) {
+                    if (
+                        $e instanceof \InvalidArgumentException
+                        || ($e instanceof PHPUnit_Framework_Error && $e->getCode() === E_RECOVERABLE_ERROR)
+                    ) {
+                        $this->assertTrue(true);
+                    } else {
+                        throw $e;
+                    }
                 }
             }
         }

@@ -5,6 +5,8 @@ namespace Tests\PhpUnitPlus\Util\Custom;
 use PhpUnitPlus\Lib\Util\Custom\ManualInput;
 use PhpUnitPlus\Lib\Util\Custom\MergeInput;
 use PhpUnitPlus\Lib\Util\InputTypeParser;
+use PhpUnitPlus\Lib\Util\Simple\AnyString;
+use PhpUnitPlus\Lib\Util\Simple\TypeHintingInput;
 
 /**
  * Class MergeInputTest
@@ -39,5 +41,13 @@ class MergeInputTest extends \PHPUnit_Framework_TestCase
         sort($expected);
         sort($actual);
         $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @expectedException \PhpUnitPlus\Lib\Exception\PhpUnitPlusException
+     */
+    public function testMergeWithObjectInput()
+    {
+        new MergeInput(new AnyString(), new TypeHintingInput(new \DateTime()));
     }
 }
