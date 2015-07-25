@@ -2,6 +2,8 @@
 
 namespace PhpUnitPlus\Lib\Util;
 
+use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
+
 trait InputTypeParser {
     /**
      * Get list fo types for given array (with custom, like emptyString etc)
@@ -15,7 +17,7 @@ trait InputTypeParser {
         $result = [];
 
         foreach ($data as $elm) {
-            switch ($type = strtolower(gettype($elm))) {
+            switch (strtolower(gettype($elm))) {
                 case 'boolean':
                     $result['boolean'] = $elm;
                     break;
@@ -63,7 +65,7 @@ trait InputTypeParser {
                     break;
 
                 default:
-                    throw new \Exception("Not supported type of variable was given - {$elm}");
+                    throw new PhpUnitPlusException("Not supported type of variable was given - {$elm}");
             }
         }
 

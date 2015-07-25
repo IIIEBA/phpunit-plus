@@ -50,7 +50,13 @@ class ManualInputTest extends \PHPUnit_Framework_TestCase
         sort($expectedTypes);
         sort($actualTypes);
         $this->assertEquals($expectedTypes, $actualTypes);
+    }
 
-
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testManualInputWithEmptyParams()
+    {
+        new ManualInput([]);
     }
 }

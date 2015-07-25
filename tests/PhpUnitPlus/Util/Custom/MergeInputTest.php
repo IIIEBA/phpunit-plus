@@ -50,4 +50,20 @@ class MergeInputTest extends \PHPUnit_Framework_TestCase
     {
         new MergeInput(new AnyString(), new TypeHintingInput(new \DateTime()));
     }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testMergeWithOneParam()
+    {
+        new MergeInput(new AnyString());
+    }
+
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testMergeWithInvalidTypeOfParams()
+    {
+        new MergeInput(new AnyString(), []);
+    }
 }

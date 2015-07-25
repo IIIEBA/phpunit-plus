@@ -70,4 +70,14 @@ class InputTypeParserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['object'], $parser->getTypesList($data));
         $this->assertEquals(['object' => new \stdClass()], $parser->getTypesList($data, true));
     }
+
+    /**
+     * @expectedException \PhpUnitPlus\Lib\Exception\PhpUnitPlusException
+     */
+    public function testUnsupportedInputType()
+    {
+        $parser = $this->getInputTypeParser();
+
+        $parser->getTypesList([curl_init()]);
+    }
 }

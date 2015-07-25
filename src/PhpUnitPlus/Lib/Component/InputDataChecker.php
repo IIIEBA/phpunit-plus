@@ -17,6 +17,17 @@ trait InputDataChecker
      */
     public function checkInputData(array $inputDataList, callable $userFunc)
     {
+        // Test input data
+        foreach ($inputDataList as $elm) {
+            if (!is_object($elm)) {
+                throw new \InvalidArgumentException("Only object allowed for input data elements");
+            }
+
+            if (($elm instanceof InputDataInterface) === false) {
+                throw new \InvalidArgumentException("Input data elements must be instance of InputDataInterface");
+            }
+        }
+
         // Prepare data
         $validPrepared = [];
         $maxCountValid = 0;

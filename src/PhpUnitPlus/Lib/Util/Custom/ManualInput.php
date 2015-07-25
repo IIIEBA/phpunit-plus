@@ -2,7 +2,6 @@
 
 namespace PhpUnitPlus\Lib\Util\Custom;
 
-use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
 use PhpUnitPlus\Lib\Util\InputDataBase;
 use PhpUnitPlus\Lib\Util\InputTypeParser;
 
