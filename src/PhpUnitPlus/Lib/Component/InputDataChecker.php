@@ -17,6 +17,10 @@ trait InputDataChecker
      */
     public function checkInputData(array $inputDataList, callable $userFunc)
     {
+        /**
+         * @var \PHPUnit_Framework_TestCase $this
+         */
+
         // Test input data
         foreach ($inputDataList as $elm) {
             if (!is_object($elm)) {
@@ -54,8 +58,7 @@ trait InputDataChecker
                 call_user_func_array($userFunc, $validPrepared);
                 $this->assertTrue(true);
             } catch (\Exception $e) {
-                if (
-                    $e instanceof \InvalidArgumentException
+                if ($e instanceof \InvalidArgumentException
                     || ($e instanceof PHPUnit_Framework_Error && $e->getCode() === E_RECOVERABLE_ERROR)
                 ) {
                     $this->fail("Test fall down with correct value with error: " . $e->getMessage());
@@ -74,11 +77,10 @@ trait InputDataChecker
 
                     call_user_func_array($userFunc, $invalidParams);
                     $this->fail(
-                        "Test didnt fall down with incorrect value with id - {$num},  and type - " . gettype($elm)
+                        "Test didn`t fall down with incorrect value with id - {$num},  and type - " . gettype($elm)
                     );
                 } catch (\Exception $e) {
-                    if (
-                        $e instanceof \InvalidArgumentException
+                    if ($e instanceof \InvalidArgumentException
                         || ($e instanceof PHPUnit_Framework_Error && $e->getCode() === E_RECOVERABLE_ERROR)
                     ) {
                         $this->assertTrue(true);

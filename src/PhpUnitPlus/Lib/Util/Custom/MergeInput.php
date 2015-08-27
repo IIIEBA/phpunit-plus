@@ -13,7 +13,8 @@ use PhpUnitPlus\Lib\Util\Simple\TypeHintingInput;
  *
  * @package PhpUnitPlus\Lib\Util\Custom
  */
-class MergeInput extends InputDataBase{
+class MergeInput extends InputDataBase
+{
     use InputTypeParser;
 
     public function __construct()

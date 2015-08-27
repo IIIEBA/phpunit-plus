@@ -16,8 +16,7 @@ class TypeHintingInput extends InputDataBase
      */
     public function __construct($value, $isNullAllowed = false)
     {
-        if (
-            !is_object($value)
+        if (!is_object($value)
             && !is_array($value)
             && !is_callable($value)
         ) {

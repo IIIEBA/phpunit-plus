@@ -4,7 +4,8 @@ namespace PhpUnitPlus\Lib\Util;
 
 use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
 
-trait InputTypeParser {
+trait InputTypeParser
+{
     /**
      * Get list fo types for given array (with custom, like emptyString etc)
      * @param array $data

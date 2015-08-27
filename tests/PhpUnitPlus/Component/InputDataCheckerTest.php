@@ -45,7 +45,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
         }
 
         // Mock assertTrue method
-        $mock->expects($this->any())->method('assertTrue')->willReturnCallback(function() {
+        $mock->expects($this->any())->method('assertTrue')->willReturnCallback(function () {
             return call_user_func_array(array($this, 'mockedAssertTrue'), func_get_args());
         });
 
@@ -80,7 +80,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
 
         // Test valid
         try {
-            $test->checkInputData([new TypeHintingInput(new \stdClass(), true)], function(){
+            $test->checkInputData([new TypeHintingInput(new \stdClass(), true)], function () {
                 $this->assertTrue(true);
             });
         } catch (\InvalidArgumentException $e) {
@@ -104,7 +104,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
         ];
         foreach ($invalid as $type => $value) {
             try {
-                $test->checkInputData([$value], function(){
+                $test->checkInputData([$value], function () {
                     $this->fail("Test doesn`t fall down with invalid input data");
                 });
 
@@ -129,14 +129,14 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
                 new TypeHintingInput([], false),
                 new TypeHintingInput(new \DateTime(), false),
             ],
-            function($one, $two, $three, $four, $five, $six) {
+            function ($one, $two, $three, $four, $five, $six) {
                 $this->someMethod($one, $two, $three, $four, $five, $six);
             }
         );
     }
 
     /**
-     * Test numbers of test casses in test
+     * Test numbers of test cases in test
      */
     public function testCheckerForCorrectNumberOfTests()
     {
@@ -167,7 +167,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
 
         $this->getChecker()->checkInputData(
             $testData,
-            function($one, $two, $three, $four, $five, $six) {
+            function ($one, $two, $three, $four, $five, $six) {
                 $this->someMethod($one, $two, $three, $four, $five, $six);
             }
         );
@@ -227,7 +227,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
                     new TypeHintingInput([], false),
                     new TypeHintingInput(new \DateTime(), false),
                 ],
-                function($one, $two, $three, $four, $five, $six) {
+                function ($one, $two, $three, $four, $five, $six) {
                     $this->someMethod($one, $two, $three, $four, $five, $six);
                 }
             );
@@ -252,7 +252,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
                     new TypeHintingInput([], false),
                     new TypeHintingInput(new \DateTime(), false),
                 ],
-                function($one, $two, $three, $four, $five, $six) {
+                function ($one, $two, $three, $four, $five, $six) {
                     $this->someMethod($one, $two, $three, $four, $five, $six);
                 }
             );
@@ -284,8 +284,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
         $four,
         array $five,
         \DateTime $six
-    )
-    {
+    ) {
         if (!is_string($one)) {
             throw new \InvalidArgumentException('one');
         }

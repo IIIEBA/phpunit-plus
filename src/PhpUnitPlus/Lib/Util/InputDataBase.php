@@ -37,5 +37,4 @@ abstract class InputDataBase implements InputDataInterface
     {
         return $this->invalid;
     }
-
 }
