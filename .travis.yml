@@ -15,5 +15,6 @@ matrix:
     - php: hhvm
 
 script:
+  - composer self-update
   - composer install
   - ./bin/dev-phpunit
