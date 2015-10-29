@@ -1,3 +1,4 @@
+
 language: php
 
 sudo: false
@@ -13,6 +14,15 @@ matrix:
   allow_failures:
     - php: 7.0
     - php: hhvm
+
+before_install:
+  - composer self-update
+
+install:
+  - composer install
+
+script:
+  - bin/dev-phpunit
 
 script:
   - composer self-update

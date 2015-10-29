@@ -20,5 +20,7 @@
     },
 
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "php-64bit": ">=5.5"
+    }
 }
