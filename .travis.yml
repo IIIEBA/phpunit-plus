@@ -23,8 +23,3 @@ install:
 
 script:
   - bin/dev-phpunit
-
-script:
-  - composer self-update
-  - composer install
-  - ./bin/dev-phpunit
