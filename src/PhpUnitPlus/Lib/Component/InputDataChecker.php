@@ -57,6 +57,8 @@ trait InputDataChecker
 
                 call_user_func_array($userFunc, $validPrepared);
                 $this->assertTrue(true);
+            } catch (\TypeError $e) {
+                $this->fail("Test fall down with correct value with error: " . $e->getMessage());
             } catch (\Exception $e) {
                 if ($e instanceof \InvalidArgumentException
                     || ($e instanceof PHPUnit_Framework_Error && $e->getCode() === E_RECOVERABLE_ERROR)
@@ -79,6 +81,8 @@ trait InputDataChecker
                     $this->fail(
                         "Test didn`t fall down with incorrect value with id - {$num},  and type - " . gettype($elm)
                     );
+                } catch (\TypeError $e) {
+                    $this->assertTrue(true);
                 } catch (\Exception $e) {
                     if ($e instanceof \InvalidArgumentException
                         || ($e instanceof PHPUnit_Framework_Error && $e->getCode() === E_RECOVERABLE_ERROR)

@@ -5,6 +5,7 @@ namespace Tests\PhpUnitPlus\Component;
 use PhpUnitPlus\Lib\Component\InputDataChecker;
 use PhpUnitPlus\Lib\Component\InputDataInterface;
 use PhpUnitPlus\Lib\Exception\PhpUnitPlusException;
+use PhpUnitPlus\Lib\Util\Simple\AnyArray;
 use PhpUnitPlus\Lib\Util\Simple\AnyBool;
 use PhpUnitPlus\Lib\Util\Simple\AnyFloat;
 use PhpUnitPlus\Lib\Util\Simple\AnyInteger;
@@ -126,7 +127,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
                 new AnyInteger(true, true, false),
                 new AnyFloat(true, false),
                 new AnyBool(false),
-                new TypeHintingInput([], false),
+                new AnyArray(true, false),
                 new TypeHintingInput(new \DateTime(), false),
             ],
             function ($one, $two, $three, $four, $five, $six) {
@@ -145,7 +146,7 @@ class InputDataCheckerTest extends \PHPUnit_Framework_TestCase
             new AnyInteger(true, true, false),
             new AnyFloat(true, false),
             new AnyBool(false),
-            new TypeHintingInput([], false),
+            new AnyArray(true, false),
             new TypeHintingInput(new \DateTime(), false),
         ];
 
